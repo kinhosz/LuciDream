@@ -35,19 +35,19 @@ class Dream:
     
     def _getSceneId(self, name):
         if not name in self._nameToId.keys():
-            self._addMockedScene()
+            self._addMockedScene(name)
         
         return self._nameToId[name]
 
-    def addScene(self, name, description, img):
-        self._validateUniqueName()
+    def addScene(self, name, description, image):
+        self._validateUniqueName(name)
     
-        scene = Scene(name, description, img)    
+        scene = Scene(name, description, image)    
         sceneId = self._getSceneId(name)
         
         self._clearMockedScene(name)
 
-        self._scene[sceneId] = scene
+        self._scenes[sceneId] = scene
     
     def getScene(self, name):
         self._checkIfNameExist(name)
