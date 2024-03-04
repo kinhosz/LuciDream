@@ -1,10 +1,10 @@
 class Choice:
-    def __init__(self, description, nextScene):
-        self._desciption = description
-        self._nextScene = nextScene
+    def __init__(self, description: str, nextScene: int):
+        self._description: str = description
+        self._nextScene: int = nextScene
     
-    def getDescription(self):
-        return self._desciption
+    def getDescription(self) -> str:
+        return self._description
     
-    def getNextScene(self):
+    def getNextScene(self) -> int:
         return self._nextScene

@@ -13,5 +13,11 @@ dream.addChoice("start", "Look out the window", "window_scene")
 dream.addScene("door_scene", "You find a hallway.", image="hallway.jpg")
 dream.addScene("window_scene", "You see a garden below.", image="garden.jpg")
 
+# fim da história
+dream.addChoice("door_scene", "Go to end", "end")
+dream.addChoice("window_scene", "Go to end", "end")
+
+dream.addScene("end", "the end", image="end.jpg")
+
 # Execute a história
 dream.run()
