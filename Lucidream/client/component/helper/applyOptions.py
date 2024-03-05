@@ -2,15 +2,7 @@ from ...constants import RESOLUTIONS
 from typing import List, Dict, Union, Tuple
 
 def applyOptions(resolution: str, options: List[List[str]]) -> Dict[str, Union[Tuple[int, int, int], int]]:
-    validOptions = {
-        'rows': 1,
-        'cols': 1,
-        'parentRow': 0,
-        'parentCol': 0,
-        'parentRowSpan': 1,
-        'parentColSpan': 1,
-        'bgColor': (255, 255, 255)
-    }
+    validOptions = {}
     
     for option in options:
         if len(option) == 0:
