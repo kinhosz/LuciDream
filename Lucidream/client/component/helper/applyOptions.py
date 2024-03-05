@@ -39,5 +39,22 @@ def applyOptions(resolution: str, options: List[List[str]]) -> Dict[str, Union[T
             if index + 3 < len(option) and option[index + 2] == "span":
                 validOptions['parentColSpan'] = int(option[index + 3])
             continue
+        
+        if index < len(option) and option[index] == 'text':
+            index += 1
+            
+            if index + 1 < len(option) and option[index] == "font":
+                validOptions['textFont'] = option[index + 1]
+            
+            if index + 1 < len(option) and option[index] == "size":
+                validOptions['textSize'] = int(option[index + 1])
+            
+            if index + 3 < len(option) and option[index] == "color":
+                validOptions['textColor'] = (int(option[index +1]), int(option[index + 2]), int(option[index + 3]))
+            
+            if index + 3 < len(option) and option[index] == "bg":
+                validOptions['textBackground'] = (int(option[index + 1]), int(option[index + 2]), int(option[index + 3]))
+            
+            continue
     
     return validOptions

@@ -1,3 +1,5 @@
+from enum import Enum
+
 RESOLUTIONS = {
     'hd': (1280, 720),
     'fullhd': (1920, 1080),
@@ -18,3 +20,7 @@ DEFAULT_OPTIONS = {
     'textBackground': (0, 0, 128)
 }
 
+class Action(Enum):
+    NONE = 1
+    RENDER = 2
+    QUIT = 3

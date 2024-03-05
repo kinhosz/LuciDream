@@ -1,6 +1,6 @@
 import pygame
 from .pages import Menu
-from .constants import RESOLUTIONS
+from .constants import RESOLUTIONS, Action
 
 class Game:
     def __init__(self):
@@ -19,7 +19,16 @@ class Game:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self._running = False
+                
+                if event.type == pygame.MOUSEBUTTONUP:
+                    response = self._page.onClick(pygame.mouse.get_pos())
                     
+                    if response['action'] == Action.QUIT:
+                        self._running = False
+                    
+                    elif response['action'] == Action.RENDER:
+                        self._page = response['resource']
+
             self._page.render()
             
             pygame.display.flip()
