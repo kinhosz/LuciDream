@@ -1,6 +1,7 @@
 from .tools import Scene
 from .graph import dfs
-from typing import List, Dict, Tuple
+from .client import Game
+from typing import List, Dict
 
 class Dream:
     def __init__(self):
@@ -115,3 +116,6 @@ class Dream:
     
     def run(self) -> None:
         self._checkValidHistory()
+        
+        game = Game()
+        game.run()
