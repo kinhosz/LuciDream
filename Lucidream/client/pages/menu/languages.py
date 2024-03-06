@@ -13,7 +13,7 @@ class Languages:
             Text("", "Languages")
         )
     
-    def render(self):
+    def render(self, **_):
         self._root.render(
             self._screen,
             self._res,

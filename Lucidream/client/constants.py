@@ -24,3 +24,5 @@ class Action(Enum):
     NONE = 1
     RENDER = 2
     QUIT = 3
+    UPDATE_SCENE = 4
+    RESTART_SCENE = 5
