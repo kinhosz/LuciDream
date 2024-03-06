@@ -32,7 +32,7 @@ class Menu:
                         "bg-0-0-255",
                         "New Game"
                     ),
-                    {'action': Action.RENDER, 'resource': NewGame(self._screen, self._res)}
+                    {'action': Action.RESTART_SCENE, 'resource': Play(self._screen, self._res)}
                 ),
                 Button(
                     "bg-0-0-255 row-3",
@@ -53,7 +53,7 @@ class Menu:
             )
         )
 
-    def render(self):
+    def render(self, **_):
         self._root.render(
             self._screen,
             self._res,

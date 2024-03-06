@@ -2,6 +2,7 @@ from .tools import Scene
 from .graph import dfs
 from .client import Game
 from typing import List, Dict
+import json
 
 class Dream:
     def __init__(self):
@@ -90,6 +91,23 @@ class Dream:
         self._checkSpectedScene('end')
         self._hasDraftScenes()
         self._hasDisconnectedScenes()
+    
+    def _checkAssets(self) -> None:
+        for scene in self._scenes:
+            try:
+                f = open(scene.getImg(), "r")
+                f.close()
+            except:
+                raise ValueError("image \"{}\" Not Found".format(scene.getImg()))
+    
+    def _getCheckpoint(self) -> str:
+        try:
+            f = open("assets/data.json", "r")
+            sceneName = json.loads(f.read())['scene']
+            f.close()
+            return sceneName
+        except:
+            return 'start'
 
     def addScene(self, name: str, description: str, image: str) -> None:
         self._validateUniqueName(name)
@@ -101,7 +119,7 @@ class Dream:
 
         self._scenes[sceneId] = scene
     
-    def getScene(self, name: str) -> Scene:
+    def _getScene(self, name: str) -> Scene:
         self._checkIfNameExist(name)
         sceneId = self._nameToId[name]
         return self._scenes[sceneId]
@@ -109,13 +127,18 @@ class Dream:
     def addChoice(self, parent: str, description: str, child: str) -> None:
         self._checkIfNameExist(parent)
         
-        scene = self.getScene(parent)
+        scene = self._getScene(parent)
         
         childId = self._getSceneId(child)
         scene.addChoice(description, childId)
     
     def run(self) -> None:
         self._checkValidHistory()
+        self._checkAssets()
+        savedScene = self._getCheckpoint()
+        print("saved: {}".format(savedScene))
         
         game = Game()
-        game.run()
+        game.run(scenes=self._scenes, 
+                 scene=self._getScene(savedScene),
+                 start=self._getScene('start'))
