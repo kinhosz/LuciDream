@@ -2,16 +2,16 @@ from .choice import Choice
 from typing import List
 
 class Scene():
-    def __init__(self, name, description, img):
+    def __init__(self, name: str, description: int, img: str):
         self._name: str = name
-        self._description: str = description
+        self._description: int = description
         self._img: str = img
         self._choices: List[Choice] = []
     
     def getName(self) -> str:
         return self._name
     
-    def getDescription(self) -> str:
+    def getDescription(self) -> int:
         return self._description
     
     def getImg(self) -> str:
