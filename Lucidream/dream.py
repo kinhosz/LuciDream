@@ -136,7 +136,6 @@ class Dream:
         self._checkValidHistory()
         self._checkAssets()
         savedScene = self._getCheckpoint()
-        print("saved: {}".format(savedScene))
         
         game = Game()
         game.run(scenes=self._scenes, 
