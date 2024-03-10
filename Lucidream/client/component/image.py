@@ -1,7 +1,7 @@
 import pygame
 from typing import Tuple
 from .helper import parseClassName, applyOptions
-from ..constants import DEFAULT_OPTIONS
+from ...constants import DEFAULT_OPTIONS
 
 class Image:
     def __init__(self, className: str, path: str):

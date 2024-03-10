@@ -20,6 +20,9 @@ email = re.search(
     '^__email__ = [\'\"]([^\'\"]+)[\'\"]', init_py, re.MULTILINE
 ).group(1)
 
+with open('requirements.txt') as f:
+    requirements = f.read().splitlines()
+
 packages = find_packages()
 
 setup(
@@ -31,9 +34,7 @@ setup(
     author=author,
     author_email=email,
     url='https://github.com/kinhosz/Lucidream',
-    install_requires=[
-        'pygame==2.5.2',
-    ],
+    install_requires=requirements,
     license='MIT',
     keywords=['dev', 'web'],
     classifiers=[

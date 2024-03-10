@@ -1,5 +1,5 @@
 from pygame.surface import Surface
-from ..constants import RESOLUTIONS, Action
+from ...constants import RESOLUTIONS, Action
 from typing import Tuple
 
 from ..component import Div, Button, Text

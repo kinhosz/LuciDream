@@ -2,3 +2,7 @@ venv*
 tmp
 *cache*
 .vscode
+dist/
+Lucidream.egg-info/
+*.spec*
+build/

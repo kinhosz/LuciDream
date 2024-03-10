@@ -1,7 +1,7 @@
 from typing import Tuple
 from pygame.surface import Surface
 from ...component import Text, Div, Image, Button
-from ...constants import RESOLUTIONS, Action
+from ....constants import RESOLUTIONS, Action
 from ....tools import Scene
 
 class Play:

@@ -1,4 +1,5 @@
 from enum import Enum
+import os, sys
 
 RESOLUTIONS = {
     'hd': (1280, 720),
@@ -26,3 +27,13 @@ class Action(Enum):
     QUIT = 3
     UPDATE_SCENE = 4
     RESTART_SCENE = 5
+
+def isApp():
+    if not getattr(sys, 'frozen', False):
+        return False
+    return True
+
+def getAsset():
+    if not isApp():
+        return 'assets'
+    return os.path.join(sys._MEIPASS, 'assets')
