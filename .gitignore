@@ -4,4 +4,5 @@ tmp
 .vscode
 dist/
 Lucidream.egg-info/
-.spec
+*.spec*
+build/
