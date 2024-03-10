@@ -2,7 +2,7 @@ import pygame
 from typing import Tuple
 from .text import Text
 from .helper import parseClassName, applyOptions, optionsPermitted
-from ..constants import DEFAULT_OPTIONS, Action
+from ...constants import DEFAULT_OPTIONS, Action
 
 class Button:
     def __init__(self, className: str, text: Text, handle: dict):

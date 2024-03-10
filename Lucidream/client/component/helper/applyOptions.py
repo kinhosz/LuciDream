@@ -1,4 +1,4 @@
-from ...constants import RESOLUTIONS
+from ....constants import RESOLUTIONS
 from typing import List, Dict, Union, Tuple
 
 def applyOptions(resolution: str, options: List[List[str]]) -> Dict[str, Union[Tuple[int, int, int], int]]:

@@ -1,6 +1,6 @@
 from pygame.surface import Surface
 from ...component import Text, Div
-from ...constants import RESOLUTIONS
+from ....constants import RESOLUTIONS
 from typing import Tuple
 
 class NewGame:

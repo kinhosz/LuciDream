@@ -1,19 +1,20 @@
 import pygame
 import json
 from .pages import Menu
-from .constants import RESOLUTIONS, Action
+from ..constants import RESOLUTIONS, Action, getAsset
 from ..tools import Scene
 
 class Game:
     def __init__(self):
         pygame.init()
         
-        self._resolution = 'hd'
+        self._info = self._getInfo()
+        self._resolution = self._info['resolution']
         self._screen = pygame.display.set_mode(RESOLUTIONS[self._resolution])
         self._clock = pygame.time.Clock()
         self._running = False
         self._page = Menu(self._screen, self._resolution)
-        
+     
     def run(self, **args) -> None:
         self._running = True
         
@@ -53,6 +54,13 @@ class Game:
             'scene': scene.getName()
         }
         
-        f = open("assets/data.json", "w")
+        f = open("data.bin".format(getAsset()), "w")
         f.write(json.dumps(data))
         f.close()
+    
+    def _getInfo(self):
+        path = getAsset() + "/logs.json"
+        f = open(path, "r")
+        info = json.loads(f.read())
+        f.close()
+        return info

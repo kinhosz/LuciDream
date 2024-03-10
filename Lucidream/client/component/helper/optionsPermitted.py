@@ -1,4 +1,4 @@
-from ...constants import DEFAULT_OPTIONS
+from ....constants import DEFAULT_OPTIONS
 
 def optionsPermitted(options: dict) -> dict:
     new_options = DEFAULT_OPTIONS.copy()

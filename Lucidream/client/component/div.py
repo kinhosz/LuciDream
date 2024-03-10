@@ -1,7 +1,7 @@
 import pygame
 from typing import Tuple
 from .helper import parseClassName, applyOptions, optionsPermitted
-from ..constants import DEFAULT_OPTIONS, Action
+from ...constants import DEFAULT_OPTIONS, Action
 from .button import Button
 
 class Div:

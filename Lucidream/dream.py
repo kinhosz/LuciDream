@@ -1,3 +1,4 @@
+from .constants import getAsset, isApp
 from .tools import Scene
 from .graph import dfs
 from .client import Game
@@ -102,7 +103,7 @@ class Dream:
     
     def _getCheckpoint(self) -> str:
         try:
-            f = open("assets/data.json", "r")
+            f = open("data.bin", "r")
             sceneName = json.loads(f.read())['scene']
             f.close()
             return sceneName
@@ -111,6 +112,8 @@ class Dream:
 
     def addScene(self, name: str, description: str, image: str) -> None:
         self._validateUniqueName(name)
+    
+        image = getAsset() + "/" + image
     
         scene = Scene(name, description, image)    
         sceneId = self._getSceneId(name)
@@ -135,6 +138,10 @@ class Dream:
     def run(self) -> None:
         self._checkValidHistory()
         self._checkAssets()
+        
+        if not isApp():
+            return
+        
         savedScene = self._getCheckpoint()
         
         game = Game()
