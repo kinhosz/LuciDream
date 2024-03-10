@@ -20,8 +20,13 @@ email = re.search(
     '^__email__ = [\'\"]([^\'\"]+)[\'\"]', init_py, re.MULTILINE
 ).group(1)
 
-with open('requirements.txt') as f:
-    requirements = f.read().splitlines()
+requirements = [
+    'altgraph==0.17.4',
+    'packaging==24.0',
+    'pygame==2.5.2',
+    'pyinstaller==6.5.0',
+    'pyinstaller-hooks-contrib==2024.3',
+]
 
 packages = find_packages()
 
