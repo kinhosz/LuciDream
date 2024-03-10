@@ -64,17 +64,17 @@ python3 -m Lucidream.build --app=example.py --resolutions=hd,fullhd,4k
 
 ### commands
 
-- `--app`: specify the name of the script
+- `--app`: specify the name of the script. Mandatory.
     example: `--app=example.py
-- `--resolutions`: specify whats resolutions you need render a game: [`hd`, `fullhd`, `4k`]
-    examples:
-        `--resolutions=4k`
-        `--resolutions=4k,fullhd`
+- `--resolutions`: specify whats resolutions you need render a game: [`hd`, `fullhd`, `4k`]. Default: `hd`
+    - examples:
+    - `--resolutions=4k`
+    - `--resolutions=4k,fullhd`
 - `--languages`: loading...
-- `--runner`: just to specify what python alias for runner you use
-    examples:
-        `--runner=python`
-        `--runner=python3`
+- `--runner`: just to specify what python alias for runner you use. Default: `python`
+    - examples:
+    - `--runner=python`
+    - `--runner=python3`
 
 > The files executables will be in a `dist` directory with the `.exe` and needed files. Cannot do cross-compilation, so
 if you need to do an executable for windows, you need run the above command for windows as well...
