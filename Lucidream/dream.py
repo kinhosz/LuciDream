@@ -12,6 +12,14 @@ class Dream:
         self._nameToId: Dict[str, int] = {}
         self._mockeds: Dict[str, int] = {}
         self._texts: List[str] = []
+        
+        self._addDefaultTexts()
+    
+    def _addDefaultTexts(self):
+        self._texts.append('Continue')
+        self._texts.append('New Game')
+        self._texts.append('Languages')
+        self._texts.append('Exit')
     
     def _isMocked(self, name: str) -> bool:
         return name in self._mockeds.keys()
@@ -126,10 +134,15 @@ class Dream:
         for text in self._texts:
             for lang in langs:
                 src = translator.detect(text).lang
-                print("text: {}, src: {}, lang: {}".format(text, src, lang))
+                try:
+                    translation = translator.translate(text, src=src, dest=lang).text
+                except:
+                    print("Failed on translate \"{}\" for {}".format(text, lang))
+                    translation = text
                 translated[lang].append(
-                    translator.translate(text, src=src, dest=lang).text
+                    translation
                 )
+                print("base: {}, src: {}, dest: {}, trans: {}".format(text, src, lang, translation))
         
         f = open(getAsset() + "/texts.json", "w")
         f.write(json.dumps(translated))
@@ -163,11 +176,10 @@ class Dream:
         self._texts.append(description)
     
     def run(self) -> None:
-        self._checkValidHistory()
-        self._checkAssets()
-        self._translate()
-        
         if not isApp():
+            self._checkValidHistory()
+            self._checkAssets()
+            self._translate()
             return
         
         savedScene = self._getCheckpoint()

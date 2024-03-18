@@ -20,7 +20,6 @@ email = re.search(
     '^__email__ = [\'\"]([^\'\"]+)[\'\"]', init_py, re.MULTILINE
 ).group(1)
 
-<<<<<<< HEAD
 requirements = [
     'altgraph==0.17.4',
     'packaging==24.0',
@@ -28,11 +27,6 @@ requirements = [
     'pyinstaller==6.5.0',
     'pyinstaller-hooks-contrib==2024.3',
 ]
-=======
-with open(os.path.join(os.path.dirname(__file__), 'requirements.txt'), 'r') as f:
-    requirements = f.read().splitlines()
-    print(requirements)
->>>>>>> 72e8fa5 (WIP: i18n)
 
 packages = find_packages()
 

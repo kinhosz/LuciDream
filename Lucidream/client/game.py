@@ -1,7 +1,7 @@
 import pygame
 import json
 from .pages import Menu
-from ..constants import RESOLUTIONS, Action, getAsset
+from ..constants import RESOLUTIONS, Action, getAsset, setLang
 from ..tools import Scene
 
 class Game:
@@ -10,6 +10,7 @@ class Game:
         
         self._info = self._getInfo()
         self._resolution = self._info['resolution']
+        self._languages = self._info['languages']
         self._screen = pygame.display.set_mode(RESOLUTIONS[self._resolution])
         self._clock = pygame.time.Clock()
         self._running = False
@@ -41,8 +42,11 @@ class Game:
                         self._save(args['start'])
                         args['scene'] = args['start']
                         self._page = response['resource']
+                    elif response['action'] == Action.SET_LANGUAGE:
+                        setLang(response['resource'])
+                        self._page = Menu(self._screen, self._resolution)
 
-            self._page.render(**args)
+            self._page.render(**args,languages=self._languages)
             
             pygame.display.flip()
             self._clock.tick(60)

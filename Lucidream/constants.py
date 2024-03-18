@@ -28,6 +28,7 @@ class Action(Enum):
     QUIT = 3
     UPDATE_SCENE = 4
     RESTART_SCENE = 5
+    SET_LANGUAGE = 6
 
 def isApp():
     if not getattr(sys, 'frozen', False):
@@ -51,3 +52,7 @@ def t(id: int) -> str:
         f.close()
     
     return TEXTS[LANG][id]
+
+def setLang(lang):
+    global LANG
+    LANG = lang

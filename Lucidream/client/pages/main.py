@@ -1,5 +1,5 @@
 from pygame.surface import Surface
-from ...constants import RESOLUTIONS, Action
+from ...constants import RESOLUTIONS, Action, t
 from typing import Tuple
 
 from ..component import Div, Button, Text
@@ -22,7 +22,7 @@ class Menu:
                     "bg-0-0-255 row-1",
                     Text(
                         "bg-0-0-255",
-                        "Continue"
+                        t(0)
                     ),
                     {'action': Action.RENDER, 'resource': Play(self._screen, self._res)}
                 ),
@@ -30,7 +30,7 @@ class Menu:
                     "bg-0-0-255 row-2",
                     Text(
                         "bg-0-0-255",
-                        "New Game"
+                        t(1)
                     ),
                     {'action': Action.RESTART_SCENE, 'resource': Play(self._screen, self._res)}
                 ),
@@ -38,7 +38,7 @@ class Menu:
                     "bg-0-0-255 row-3",
                     Text(
                         "bg-0-0-255",
-                        "Languages"
+                        t(2)
                     ),
                     {'action': Action.RENDER, 'resource': Languages(self._screen, self._res)}
                 ),
@@ -46,7 +46,7 @@ class Menu:
                     "bg-0-0-255 row-4",
                     Text(
                         "bg-0-0-255",
-                        "Quit"
+                        t(3)
                     ),
                     {'action': Action.QUIT, 'resource': None}
                 )
