@@ -42,7 +42,7 @@ Will create an object to use in the code
 ##### parameters
 - `name`: the name of the scene. Should be unique for all scenes, and should be exist one `start` and `end` scene.
 - `description`: the text description of the scene, rendered on the client interface.
-- `image`: path of your image resource that will be rendered on the client interface. Should be inside an `assets` folder.
+- `image`: path of your image (jgp) resource that will be rendered on the client interface. Should be inside an `assets` folder.
 
 #### addChoice
 
@@ -50,7 +50,7 @@ Will create an object to use in the code
 - `parent`: scene name of this choice. Will be rendered like an option when the user is on that scene.
 - `description`: description of that choice. Like an option to follow in the history.
 - `child`: the next scene, if this choice is choosed, the next scene will be the scene with the `child` name.
-
+> Note: When add a choice, the parent scene should be created before the choice, but you can create the child scene after it.
 #### run
 Just render all history, run tests and check if assets files exists. Creating all client interface as well.
 It will check if all scenes can be touch, and if exists valid flow to the all storytelling.
@@ -75,7 +75,7 @@ python3 -m Lucidream.build --app=example.py --resolutions=hd,fullhd,4k
         {'afrikaans': 'af', 'albanian': 'sq', 'amharic': 'am', 'arabic': 'ar', 'armenian': 'hy', 'azerbaijani': 'az', 'basque': 'eu', 'belarusian': 'be', 'bengali': 'bn', 'bosnian': 'bs', 'bulgarian': 'bg', 'catalan': 'ca', 'cebuano': 'ceb', 'chichewa': 'ny', 'chinese (simplified)': 'zh-cn', 'chinese (traditional)': 'zh-tw', 'corsican': 'co', 'croatian': 'hr', 'czech': 'cs', 'danish': 'da', 'dutch': 'nl', 'english': 'en', 'esperanto': 'eo', 'estonian': 'et', 'filipino': 'tl', 'finnish': 'fi', 'french': 'fr', 'frisian': 'fy', 'galician': 'gl', 'georgian': 'ka', 'german': 'de', 'greek': 'el', 'gujarati': 'gu', 'haitian creole': 'ht', 'hausa': 'ha', 'hawaiian': 'haw', 'hebrew': 'he', 'hindi': 'hi', 'hmong': 'hmn', 'hungarian': 'hu', 'icelandic': 'is', 'igbo': 'ig', 'indonesian': 'id', 'irish': 'ga', 'italian': 'it', 'japanese': 'ja', 'javanese': 'jw', 'kannada': 'kn', 'kazakh': 'kk', 'khmer': 'km', 'korean': 'ko', 'kurdish (kurmanji)': 'ku', 'kyrgyz': 'ky', 'lao': 'lo', 'latin': 'la', 'latvian': 'lv', 'lithuanian': 'lt', 'luxembourgish': 'lb', 'macedonian': 'mk', 'malagasy': 'mg', 'malay': 'ms', 'malayalam': 'ml', 'maltese': 'mt', 'maori': 'mi', 'marathi': 'mr', 'mongolian': 'mn', 'myanmar (burmese)': 'my', 'nepali': 'ne', 'norwegian': 'no', 'odia': 'or', 'pashto': 'ps', 'persian': 'fa', 'polish': 'pl', 'portuguese': 'pt', 'punjabi': 'pa', 'romanian': 'ro', 'russian': 'ru', 'samoan': 'sm', 'scots gaelic': 'gd', 'serbian': 'sr', 'sesotho': 'st', 'shona': 'sn', 'sindhi': 'sd', 'sinhala': 'si', 'slovak': 'sk', 'slovenian': 'sl', 'somali': 'so', 'spanish': 'es', 'sundanese': 'su', 'swahili': 'sw', 'swedish': 'sv', 'tajik': 'tg', 'tamil': 'ta', 'telugu': 'te', 'thai': 'th', 'turkish': 'tr', 'ukrainian': 'uk', 'urdu': 'ur', 'uyghur': 'ug', 'uzbek': 'uz', 'vietnamese': 'vi', 'welsh': 'cy', 'xhosa': 'xh', 'yiddish': 'yi', 'yoruba': 'yo', 'zulu': 'zu'}
     ```
     examples:
-        `--languages=en,pt-BR`
+        `--languages=en,pt`
 - `--runner`: just to specify what python alias for runner you use. Default: `python`
     - examples:
     - `--runner=python`
