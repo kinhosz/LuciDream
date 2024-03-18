@@ -1,4 +1,4 @@
-from pygame.surface import Surface
+import pygame
 from ...constants import RESOLUTIONS, Action, t
 from typing import Tuple
 
@@ -6,7 +6,7 @@ from ..component import Div, Button, Text
 from .menu import Languages, Play, NewGame
 
 class Menu:
-    def __init__(self, screen: Surface, resolution: str):
+    def __init__(self, screen: pygame.surface, resolution: str):
         self._screen = screen
         self._res = resolution
 
@@ -58,7 +58,7 @@ class Menu:
             self._screen,
             self._res,
             (0, 0),
-            RESOLUTIONS[self._res],
+            (pygame.display.Info().current_w, pygame.display.Info().current_h),
         )
     
     def onClick(self, mousePos: Tuple[int, int]) -> dict:

@@ -11,7 +11,7 @@ class Game:
         self._info = self._getInfo()
         self._resolution = self._info['resolution']
         self._languages = self._info['languages']
-        self._screen = pygame.display.set_mode(RESOLUTIONS[self._resolution])
+        self._screen = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
         self._clock = pygame.time.Clock()
         self._running = False
         self._page = Menu(self._screen, self._resolution)
@@ -45,6 +45,10 @@ class Game:
                     elif response['action'] == Action.SET_LANGUAGE:
                         setLang(response['resource'])
                         self._page = Menu(self._screen, self._resolution)
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_ESCAPE:
+                        self._save(args['scene'])
+                        self._running = False
 
             self._page.render(**args,languages=self._languages)
             
