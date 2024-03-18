@@ -1,5 +1,6 @@
 from enum import Enum
 import os, sys
+import json
 
 RESOLUTIONS = {
     'hd': (1280, 720),
@@ -27,6 +28,7 @@ class Action(Enum):
     QUIT = 3
     UPDATE_SCENE = 4
     RESTART_SCENE = 5
+    SET_LANGUAGE = 6
 
 def isApp():
     if not getattr(sys, 'frozen', False):
@@ -37,3 +39,20 @@ def getAsset():
     if not isApp():
         return 'assets'
     return os.path.join(sys._MEIPASS, 'assets')
+
+TEXTS = None
+LANG = 'en'
+
+def t(id: int) -> str:
+    global TEXTS
+    
+    if TEXTS == None:
+        f = open(getAsset() + "/texts.json")
+        TEXTS = json.loads(f.read())
+        f.close()
+    
+    return TEXTS[LANG][id]
+
+def setLang(lang):
+    global LANG
+    LANG = lang

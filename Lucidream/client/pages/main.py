@@ -1,12 +1,12 @@
-from pygame.surface import Surface
-from ...constants import RESOLUTIONS, Action
+import pygame
+from ...constants import RESOLUTIONS, Action, t
 from typing import Tuple
 
 from ..component import Div, Button, Text
 from .menu import Languages, Play, NewGame
 
 class Menu:
-    def __init__(self, screen: Surface, resolution: str):
+    def __init__(self, screen: pygame.surface, resolution: str):
         self._screen = screen
         self._res = resolution
 
@@ -22,7 +22,7 @@ class Menu:
                     "bg-0-0-255 row-1",
                     Text(
                         "bg-0-0-255",
-                        "Continue"
+                        t(0)
                     ),
                     {'action': Action.RENDER, 'resource': Play(self._screen, self._res)}
                 ),
@@ -30,7 +30,7 @@ class Menu:
                     "bg-0-0-255 row-2",
                     Text(
                         "bg-0-0-255",
-                        "New Game"
+                        t(1)
                     ),
                     {'action': Action.RESTART_SCENE, 'resource': Play(self._screen, self._res)}
                 ),
@@ -38,7 +38,7 @@ class Menu:
                     "bg-0-0-255 row-3",
                     Text(
                         "bg-0-0-255",
-                        "Languages"
+                        t(2)
                     ),
                     {'action': Action.RENDER, 'resource': Languages(self._screen, self._res)}
                 ),
@@ -46,7 +46,7 @@ class Menu:
                     "bg-0-0-255 row-4",
                     Text(
                         "bg-0-0-255",
-                        "Quit"
+                        t(3)
                     ),
                     {'action': Action.QUIT, 'resource': None}
                 )
@@ -58,7 +58,7 @@ class Menu:
             self._screen,
             self._res,
             (0, 0),
-            RESOLUTIONS[self._res],
+            (pygame.display.Info().current_w, pygame.display.Info().current_h),
         )
     
     def onClick(self, mousePos: Tuple[int, int]) -> dict:

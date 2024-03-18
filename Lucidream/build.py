@@ -37,12 +37,25 @@ def _testApp(runner, app_path):
     
     return code.returncode == 0
 
-def _buildLogs(resolution):
+def _updateResolution(resolution):
+    path = getAsset() + "/logs.json"
+    f = open(path, "r")
+    info = json.loads(f.read())
+    f.close()
+    
+    info['resolution'] = resolution
+
+    f = open(path, "w")
+    f.write(json.dumps(info))
+    f.close()
+
+def _buildLanguages(languages: str):
     path = getAsset() + "/logs.json"
     f = open(path, "w")
     
     info = {
-        "resolution": resolution,
+        "resolution": 'hd',
+        "languages": languages,
     }
     f.write(json.dumps(info))
     f.close()
@@ -51,7 +64,7 @@ def _buildBin(app_path, resolution: str):
     app_name = app_path.split('/')[-1][:-3]
     distpath = "dist/{}_{}".format(app_name, resolution)
     
-    _buildLogs(resolution)
+    _updateResolution(resolution)
 
     cmd = "pyinstaller --onefile --add-data=assets:assets --distpath={} {}".format(distpath, app_path)
     subprocess.run(cmd.split())
@@ -62,6 +75,8 @@ def build():
     resolutions = args.resolutions.split(',')
     languages = args.languages.split(',')
     runner = args.runner
+    
+    _buildLanguages(languages)
     
     if not _testApp(runner, app_path):
         return None

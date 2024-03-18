@@ -1,11 +1,11 @@
 from typing import Tuple
-from pygame.surface import Surface
+import pygame
 from ...component import Text, Div, Image, Button
-from ....constants import RESOLUTIONS, Action
+from ....constants import RESOLUTIONS, Action, t
 from ....tools import Scene
 
 class Play:
-    def __init__(self, screen: Surface, resolution: str):
+    def __init__(self, screen: pygame.surface, resolution: str):
         self._screen = screen
         self._res = resolution
         
@@ -20,7 +20,7 @@ class Play:
             self._screen,
             self._res,
             (0, 0),
-            RESOLUTIONS[self._res]
+            (pygame.display.Info().current_w, pygame.display.Info().current_h)
         )
 
     def onClick(self, mousePos: Tuple[int, int]) -> dict:
@@ -37,7 +37,7 @@ class Play:
                     "row-{} col-2".format(offset + i),
                     Text(
                         "text-size-16",
-                        scene.getChoice(i).getDescription()
+                        t(scene.getChoice(i).getDescription())
                     ),
                     {'action': Action.UPDATE_SCENE, 'resource': scene.getChoice(i).getNextScene()}
                 )
@@ -51,7 +51,7 @@ class Play:
             ),
             Text(
                 "col-2",
-                scene.getDescription()
+                t(scene.getDescription())
             ),
             *choices
         )

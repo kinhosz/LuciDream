@@ -4,12 +4,22 @@ from .graph import dfs
 from .client import Game
 from typing import List, Dict
 import json
+from googletrans import Translator
 
 class Dream:
     def __init__(self):
         self._scenes: List[Scene] = []
         self._nameToId: Dict[str, int] = {}
         self._mockeds: Dict[str, int] = {}
+        self._texts: List[str] = []
+        
+        self._addDefaultTexts()
+    
+    def _addDefaultTexts(self):
+        self._texts.append('Continue')
+        self._texts.append('New Game')
+        self._texts.append('Languages')
+        self._texts.append('Exit')
     
     def _isMocked(self, name: str) -> bool:
         return name in self._mockeds.keys()
@@ -109,13 +119,42 @@ class Dream:
             return sceneName
         except:
             return 'start'
+    
+    def _translate(self) -> None:
+        f = open(getAsset() + "/logs.json", "r")
+        langs = json.loads(f.read())['languages']
+        f.close()
+        
+        translated = {}
+        for lang in langs:
+            translated[lang] = []
+        
+        translator = Translator()
+        
+        for text in self._texts:
+            for lang in langs:
+                src = translator.detect(text).lang
+                try:
+                    translation = translator.translate(text, src=src, dest=lang).text
+                except:
+                    print("Failed on translate \"{}\" for {}".format(text, lang))
+                    translation = text
+                translated[lang].append(
+                    translation
+                )
+                print("base: {}, src: {}, dest: {}, trans: {}".format(text, src, lang, translation))
+        
+        f = open(getAsset() + "/texts.json", "w")
+        f.write(json.dumps(translated))
+        f.close()
 
     def addScene(self, name: str, description: str, image: str) -> None:
         self._validateUniqueName(name)
     
         image = getAsset() + "/" + image
     
-        scene = Scene(name, description, image)    
+        scene = Scene(name, len(self._texts), image)
+        self._texts.append(description)    
         sceneId = self._getSceneId(name)
         
         self._clearMockedScene(name)
@@ -133,13 +172,14 @@ class Dream:
         scene = self._getScene(parent)
         
         childId = self._getSceneId(child)
-        scene.addChoice(description, childId)
+        scene.addChoice(len(self._texts), childId)
+        self._texts.append(description)
     
     def run(self) -> None:
-        self._checkValidHistory()
-        self._checkAssets()
-        
         if not isApp():
+            self._checkValidHistory()
+            self._checkAssets()
+            self._translate()
             return
         
         savedScene = self._getCheckpoint()
